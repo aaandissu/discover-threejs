@@ -15,6 +15,7 @@ import { createLights } from "./scene/Lights";
 import { createRenderer } from "./systems/Renderer";
 import { Resizer } from "./systems/Resizer";
 import { Loop } from "./systems/Loop";
+import { createControls } from "./systems/controls";
 
 let camera: PerspectiveCamera | OrthographicCamera;
 let renderer: WebGLRenderer;
@@ -44,13 +45,16 @@ export default class SceneManager {
 
     // Create a loop
     loop = new Loop(camera, scene, renderer);
-    loop.updatables.push(cube);
+    // loop.updatables.push(cube);
 
     // Render the scene
     const resizer = new Resizer(container, camera, renderer);
     // resizer.onResize = () => {
     //   this.render();
     // };
+    const controls = createControls(camera, renderer.domElement);
+    (controls as any).addEventListener("change", () => this.render());
+    loop.updatables.push(controls);
   }
 
   render() {
