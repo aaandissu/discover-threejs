@@ -14,7 +14,7 @@ function createControls(
   const controls = new ExtendedOrbitControls(camera, canvas);
   controls.enableDamping = true;
   controls.dampingFactor = 0.5;
-  controls.autoRotate = true;
+  // controls.autoRotate = true;
   controls.enableZoom = true;
   controls.minDistance = 5;
   controls.maxDistance = 20;

@@ -8,7 +8,8 @@ import {
 } from "three";
 
 import { createCamera } from "./scene/Camera";
-import { createCube } from "./objects/Cube";
+// import { createCube } from "./objects/Cube";
+import { createMeshGroup } from "./objects/meshGroup";
 import { createScene } from "./scene/Scene";
 import { createLights } from "./scene/Lights";
 
@@ -32,10 +33,13 @@ export default class SceneManager {
     camera = createCamera();
 
     // Create a cube
-    const cube = createCube();
+    // const cube = createCube();
+    // create a mesh group
+    const meshGroup = createMeshGroup();
     // Create a light
     const { ambientLight, mainLight } = createLights();
-    scene.add(cube, ambientLight, mainLight);
+    // scene.add(cube, ambientLight, mainLight);
+    scene.add(meshGroup, ambientLight, mainLight);
 
     // Create a renderer
     renderer = createRenderer();
@@ -46,6 +50,8 @@ export default class SceneManager {
     // Create a loop
     loop = new Loop(camera, scene, renderer);
     // loop.updatables.push(cube);
+
+    loop.updatables.push(meshGroup);
 
     // Render the scene
     const resizer = new Resizer(container, camera, renderer);
