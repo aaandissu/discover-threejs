@@ -19,10 +19,9 @@ const radiansPerSec = MathUtils.degToRad(30);
 function createMaterial() {
   const textureLoader = new TextureLoader();
 
-  const texture = textureLoader.load(uvTexture);
+  const texture = textureLoader.load(bwTexture);
 
   const material = new MeshStandardMaterial({
-    color: "blue",
     map: texture,
     roughnessMap: texture,
   });

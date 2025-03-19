@@ -34,8 +34,8 @@ export default class SceneManager {
     // Create a cube
     const cube = createCube();
     // Create a light
-    const light = createLights();
-    scene.add(cube, light);
+    const { ambientLight, mainLight } = createLights();
+    scene.add(cube, ambientLight, mainLight);
 
     // Create a renderer
     renderer = createRenderer();
