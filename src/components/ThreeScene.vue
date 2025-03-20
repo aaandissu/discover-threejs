@@ -13,10 +13,13 @@ export default defineComponent({
     const threeContainer = ref<HTMLElement | null>(null);
     let scene: SceneManager;
 
-    onMounted(() => {
+    onMounted(async () => {
       if (threeContainer.value) {
         // Initialize the Three.js scene
         scene = new SceneManager(threeContainer.value);
+
+        await scene.init();
+
         scene.render();
         scene.start();
       }

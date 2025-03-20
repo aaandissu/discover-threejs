@@ -17,6 +17,8 @@ import { createRenderer } from "./systems/Renderer";
 import { Resizer } from "./systems/Resizer";
 import { Loop } from "./systems/Loop";
 import { createControls } from "./systems/controls";
+import { createAxesHelper, createGridHelper } from "./scene/Helpers";
+import { loadDucky } from "./objects/ducky/ducky";
 
 let camera: PerspectiveCamera | OrthographicCamera;
 let renderer: WebGLRenderer;
@@ -39,12 +41,15 @@ export default class SceneManager {
     // Create a light
     const { ambientLight, mainLight } = createLights();
     // scene.add(cube, ambientLight, mainLight);
-    scene.add(meshGroup, ambientLight, mainLight);
+    // scene.add(meshGroup, ambientLight, mainLight);
+    scene.add(ambientLight, mainLight);
+    scene.add(createAxesHelper(), createGridHelper());
 
     // Create a renderer
     renderer = createRenderer();
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.shadowMap.enabled = true;
     container.appendChild(renderer.domElement);
 
     // Create a loop
@@ -61,6 +66,11 @@ export default class SceneManager {
     const controls = createControls(camera, renderer.domElement);
     (controls as any).addEventListener("change", () => this.render());
     loop.updatables.push(controls);
+  }
+
+  async init() {
+    const { duckyMesh } = await loadDucky();
+    scene.add(duckyMesh);
   }
 
   render() {

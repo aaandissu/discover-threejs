@@ -6,6 +6,7 @@ function createLights() {
   const ambientLight = new HemisphereLight("white", "darkgray", 0.5);
 
   const mainLight = new DirectionalLight("white", 5);
+  mainLight.castShadow = true;
 
   // move the light right, up, and towards us
   mainLight.position.set(10, 10, 10);
