@@ -19,6 +19,7 @@ import { Loop } from "./systems/Loop";
 import { createControls } from "./systems/controls";
 import { createAxesHelper, createGridHelper } from "./scene/Helpers";
 import { loadDucky } from "./objects/ducky/ducky";
+import { loadParrot } from "./objects/parrot/parrot";
 
 let camera: PerspectiveCamera | OrthographicCamera;
 let renderer: WebGLRenderer;
@@ -69,8 +70,11 @@ export default class SceneManager {
   }
 
   async init() {
-    const { duckyMesh } = await loadDucky();
-    scene.add(duckyMesh);
+    //const { duckyMesh } = await loadDucky();
+    //scene.add(duckyMesh);
+    const { parrotMesh } = await loadParrot();
+    scene.add(parrotMesh);
+    loop.updatables.push(parrotMesh);
   }
 
   render() {
